@@ -20,11 +20,11 @@ jobs:
                 
           - name: Find cross-compiler path
             run: |
-              echo "=== Checking if it is already in the global PATH ==="
-              which aarch64-none-linux-gnu-gcc || true
+              echo "=== Checking for package-managed aarch64 compiler ==="
+              which aarch64-linux-gnu-gcc || true
               
-              echo "=== Searching the entire root system for the compiler ==="
-              find / -name "aarch64-none-linux-gnu-gcc" 2>/dev/null || true
+              echo "=== Checking the exact location of any aarch64 compiler ==="
+              find / -name "*aarch64*gcc*" 2>/dev/null || true
                   
           - name: Run full test
             env:
