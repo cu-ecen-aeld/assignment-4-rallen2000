@@ -22,7 +22,9 @@ jobs:
               GIT_SSH_COMMAND: "ssh -o StrictHostKeyChecking=no"
               FORCE_UNSAFE_CONFIGURE: 1
             run: |
-              cd buildroot && make distclean && cd ..
+              cd buildroot && make distclean
+                make defconfig BR2_EXTERNAL=../base_external BR2_DEFCONFIG=../base_external/configs/aesd_qemu_defconfig
+              cd ..
               ./full-test.sh
           - name: Cleanup
             if: always()
