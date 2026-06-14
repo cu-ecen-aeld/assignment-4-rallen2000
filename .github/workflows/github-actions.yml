@@ -21,10 +21,8 @@ jobs:
             env:
               GIT_SSH_COMMAND: "ssh -o StrictHostKeyChecking=no"
               FORCE_UNSAFE_CONFIGURE: 1
+              BR2_TOOLCHAIN_EXTERNAL_PATH: "/usr/local/arm-cross-compiler/install/arm-gnu-toolchain-13.3.rel1-x86_64-aarch64-none-linux-gnu"
             run: |
-              cd buildroot && make distclean
-                make defconfig BR2_EXTERNAL=../base_external BR2_DEFCONFIG=../base_external/configs/aesd_qemu_defconfig
-              cd ..
               ./full-test.sh
           - name: Cleanup
             if: always()
