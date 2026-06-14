@@ -17,6 +17,14 @@ jobs:
           - uses: webfactory/ssh-agent@v0.5.3
             with:
                 ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+                
+          - name: Find cross-compiler path
+            run: |
+              echo "=== Checking /usr/local/arm-cross-compiler/install structure ==="
+              ls -la /usr/local/arm-cross-compiler/install || true
+              echo "=== Searching for the gcc executable location ==="
+              find /usr/local -name "aarch64-none-linux-gnu-gcc" || true
+                  
           - name: Run full test
             env:
               GIT_SSH_COMMAND: "ssh -o StrictHostKeyChecking=no"
