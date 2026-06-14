@@ -20,10 +20,11 @@ jobs:
                 
           - name: Find cross-compiler path
             run: |
-              echo "=== Checking /usr/local/arm-cross-compiler/install structure ==="
-              ls -la /usr/local/arm-cross-compiler/install || true
-              echo "=== Searching for the gcc executable location ==="
-              find /usr/local -name "aarch64-none-linux-gnu-gcc" || true
+              echo "=== Checking if it is already in the global PATH ==="
+              which aarch64-none-linux-gnu-gcc || true
+              
+              echo "=== Searching the entire root system for the compiler ==="
+              find / -name "aarch64-none-linux-gnu-gcc" 2>/dev/null || true
                   
           - name: Run full test
             env:
